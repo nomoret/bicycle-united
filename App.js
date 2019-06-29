@@ -4,7 +4,12 @@ import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, Button } from "react-native";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/es/integration/react";
 import { createStackNavigator, createAppContainer } from "react-navigation";
+import configureStore from "./redux/configureStore";
+
+const { persistor, store } = configureStore();
 
 class App extends Component {
   state = {
@@ -25,23 +30,27 @@ class App extends Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          <View />
-          <Text>Counter</Text>
-          <Text>Click add the count</Text>
-          <Text>{`${this.state.count}`}</Text>
-          <View style={styles1.actions}>
-            <Button title="add" onPress={this._addCount} />
-            <Button title="reset" onPress={this._resetCount} />
-          </View>
-          <Button
-            title="alert"
-            onPress={() => {
-              console.log("click alret btn");
-              alert("alert");
-            }}
-          />
-        </View>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <View style={styles.container}>
+              <View />
+              <Text>Counter</Text>
+              <Text>Click add the count</Text>
+              <Text>{`${this.state.count}`}</Text>
+              <View style={styles1.actions}>
+                <Button title="add" onPress={this._addCount} />
+                <Button title="reset" onPress={this._resetCount} />
+              </View>
+              <Button
+                title="alert"
+                onPress={() => {
+                  console.log("click alret btn");
+                  alert("alert");
+                }}
+              />
+            </View>
+          </PersistGate>
+        </Provider>
       );
     }
   }

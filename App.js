@@ -3,18 +3,16 @@ import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View, Button } from "react-native";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
-import { createStackNavigator, createAppContainer } from "react-navigation";
 import configureStore from "./redux/configureStore";
+import AppContainer from "./components/AppContainer";
 
 const { persistor, store } = configureStore();
 
 class App extends Component {
   state = {
-    isLoadingComplete: false,
-    count: 0
+    isLoadingComplete: false
   };
 
   render() {
@@ -32,23 +30,7 @@ class App extends Component {
       return (
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            <View style={styles.container}>
-              <View />
-              <Text>Counter</Text>
-              <Text>Click add the count</Text>
-              <Text>{`${this.state.count}`}</Text>
-              <View style={styles1.actions}>
-                <Button title="add" onPress={this._addCount} />
-                <Button title="reset" onPress={this._resetCount} />
-              </View>
-              <Button
-                title="alert"
-                onPress={() => {
-                  console.log("click alret btn");
-                  alert("alert");
-                }}
-              />
-            </View>
+            <AppContainer />
           </PersistGate>
         </Provider>
       );
@@ -77,31 +59,6 @@ class App extends Component {
       isLoadingComplete: true
     });
   };
-
-  _addCount = () => this.setState({ count: this.state.count + 1 });
-
-  _resetCount = () => this.setState({ count: 0 });
 }
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: App
-  }
-});
-
-export default createAppContainer(AppNavigator);
-
-const styles1 = StyleSheet.create({
-  actions: {
-    flexDirection: "row"
-  }
-});
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-});
+export default App;

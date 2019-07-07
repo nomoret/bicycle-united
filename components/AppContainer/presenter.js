@@ -10,6 +10,7 @@ import {
 } from "react-native";
 // import LoggedOutNavigation from "../../navigation/LoggedOutNavigation";
 import ActionNavigation from "../../navigation/ActionNavigation";
+import WebScreen from "../../screens/WebScreen";
 
 const { width, height } = Dimensions.get("window");
 class AppContainer extends Component {
@@ -26,10 +27,8 @@ class AppContainer extends Component {
         <StatusBar barStyle={"light-content"} hidden={false} />
         <View style={styles.head}>
           <View style={styles.navi}>
-            <Text>Where is Bike?</Text>
-            <TouchableOpacity>
-              <Text>Offical site</Text>
-            </TouchableOpacity>
+            <Text style={styles.title}>Where is Bike?</Text>
+            <WebScreen />
           </View>
         </View>
         <View style={styles.actionContainer}>
@@ -60,8 +59,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width
   },
+  title: {
+    flexGrow: 1,
+    paddingRight: 50,
+    paddingTop: 10,
+    paddingBottom: 10,
+    textAlign: "right",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  official: {
+    justifyContent: "center"
+  },
   navi: {
-    flexDirection: "row"
+    // flex: 1,
+    flexDirection: "row",
+    width
   },
   actionContainer: {
     flex: 8,

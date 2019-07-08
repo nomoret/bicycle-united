@@ -24,7 +24,20 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.nomoret.bicycle",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
+      }
+    },
+    "android": {
+      "package": "com.nomoret.bicycle",
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyD9i6DvpwtNnXoSEF-d8G9Xg2QHL4bkxIg" }   
+     }
     },
     "description": ""
   }

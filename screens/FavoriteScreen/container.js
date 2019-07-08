@@ -25,7 +25,7 @@ class Container extends Component {
         ]
       },
       {
-        title: "대흥동 성심당",
+        title: "tokyo street",
         data: [
           {
             number: 777,

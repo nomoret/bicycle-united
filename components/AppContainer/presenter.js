@@ -20,15 +20,15 @@ class AppContainer extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-    console.log(isLoggedIn);
 
     return (
       <View style={styles.container}>
         <StatusBar barStyle={"light-content"} hidden={false} />
         <View style={styles.head}>
           <View style={styles.navi}>
+            <Text style={styles.title} />
             <Text style={styles.title}>Where is Bike?</Text>
-            <WebScreen />
+            <WebScreen style={styles.official} />
           </View>
         </View>
         <View style={styles.actionContainer}>
@@ -60,20 +60,19 @@ const styles = StyleSheet.create({
     width
   },
   title: {
-    flexGrow: 1,
-    paddingRight: 50,
+    flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
-    textAlign: "right",
+    textAlign: "center",
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center"
   },
   official: {
+    flex: 1,
     justifyContent: "center"
   },
   navi: {
-    // flex: 1,
     flexDirection: "row",
     width
   },

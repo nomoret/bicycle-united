@@ -27,7 +27,8 @@ export default class WebScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginRight: 10,
+    flex: 1,
+    textAlign: "right",
     alignItems: "center",
     justifyContent: "center"
   },

@@ -1,11 +1,11 @@
 import { createAppContainer, createBottomTabNavigator } from "react-navigation";
-import AlramScreen from "../screens/AlramScreen";
-import MapScreen from "../screens/MapScreen";
 import FavoriteScreen from "../screens/FavoriteScreen";
+import TimerScreen from "../screens/TimerScreen";
+import MapScreen from "../screens/MapScreen";
 
 const ActionTabNavigation = createBottomTabNavigator({
   Favorite: FavoriteScreen,
-  Alram: AlramScreen,
+  Alram: TimerScreen,
   Map: MapScreen
 });
 

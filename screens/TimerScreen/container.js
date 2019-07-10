@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import TimerScreen from "./presenter";
+import { Alert } from "react-native";
+
+const TIMER_NUMBER = 60 * 55;
 
 class Container extends Component {
   state = {
-    time: 55,
+    time: TIMER_NUMBER,
     isPlaying: false
   };
 
@@ -11,7 +14,22 @@ class Container extends Component {
     console.log(state);
     if (state.time === 0) {
       clearInterval(state.timeInteval);
-      return { isPlaying: false, time: 3 };
+      setTimeout(() => {
+        Alert.alert(
+          "WARNNING",
+          "Please Return the BIKE",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: false }
+        );
+      }, 1000);
+      return { isPlaying: false, time: TIMER_NUMBER };
     } else {
       return null;
     }
@@ -21,6 +39,7 @@ class Container extends Component {
     return (
       <TimerScreen
         time={this.state.time}
+        isPlaying={this.state.isPlaying}
         handlePlay={this._handlePlay}
         resetCount={this._resetCount}
         timerPopUp={this._timerPopUp}
@@ -28,15 +47,22 @@ class Container extends Component {
     );
   }
 
+  componentWillUnmount() {
+    console.log("unmount");
+    if (this.state.isPlaying) {
+      this.setState({
+        isPlaying: false,
+        time: TIMER_NUMBER
+      });
+      clearInterval(this.state.timeInteval);
+    }
+  }
+
   _handlePlay = () => {
     if (!this.state.isPlaying) {
       const timeInteval = setInterval(() => {
         const { time } = this.state;
-        // if (time - 1 < 0) {
-        //   this.setState({ time: 0 });
-        // } else {
         this.setState({ time: time - 1 });
-        // }
       }, 1000);
 
       this.setState({
@@ -50,15 +76,26 @@ class Container extends Component {
     if (this.state.isPlaying) {
       this.setState({
         isPlaying: false,
-        time: 3
+        time: TIMER_NUMBER
       });
       clearInterval(this.state.timeInteval);
     }
   };
 
   _timerPopUp = () => {
-    console.log("click alret btn");
-    alert("alert");
+    Alert.alert(
+      "WARNNING",
+      "Please Return the BIKE",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ],
+      { cancelable: false }
+    );
   };
 }
 

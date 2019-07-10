@@ -10,7 +10,12 @@ import {
 const { width } = Dimensions.get("window");
 
 const formatting = time => {
-  const represent = time < 10 ? `0${time}:00:00` : `${time}:00:00`;
+  const minute = Math.floor(time / 60);
+  const second = time % 60;
+  console.log(minute, second);
+  const represent = `${minute < 10 ? `0${minute}` : `${minute}`}:${
+    second < 10 ? `0${second}` : `${second}`
+  }`;
   return represent;
 };
 
@@ -18,17 +23,22 @@ const TimerScreen = props => {
   const { time, handlePlay, resetCount, timerPopUp } = props;
   return (
     <View style={styles.container}>
-      <Text>Timer Screen</Text>
-      <Text>{formatting(time)}</Text>
+      <Text style={styles.title}>Timer Screen</Text>
+      <Text style={styles.format}>{formatting(time)}</Text>
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.btn} onPress={handlePlay}>
-          <Text style={styles.btnText}>Play</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress={resetCount}>
-          <Text style={styles.btnText}>Stop</Text>
-        </TouchableOpacity>
+        {props.isPlaying ? (
+          <TouchableOpacity style={styles.btn} onPress={resetCount}>
+            <Text style={styles.btnText}>Stop</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.btn} onPress={handlePlay}>
+            <Text style={styles.btnText}>Play</Text>
+          </TouchableOpacity>
+        )}
       </View>
-      <Button style={styles.btn} title="alert" onPress={timerPopUp} />
+      <TouchableOpacity style={{ marginTop: 20 }} onPress={timerPopUp}>
+        <Text style={{ color: "#1e88e5" }}>Alert</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -38,16 +48,29 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center"
   },
+  title: {
+    fontSize: 30
+  },
+  format: {
+    fontSize: 60
+  },
   actions: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+    marginTop: 10,
     alignContent: "center",
-    width
+    justifyContent: "center",
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: "#0d47a1"
   },
   btn: {
     backgroundColor: "white",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginLeft: 10,
+    borderRadius: 30,
+    width: 60,
+    height: 60
   },
   btnText: {
     color: "#3E99EE"

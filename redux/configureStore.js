@@ -3,6 +3,7 @@ import { persistStore, persistCombineReducers } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 import user from "./modules/users";
+import favorites from "./modules/favorites";
 
 const middleware = [thunk];
 
@@ -12,6 +13,7 @@ const persistConfig = {
 };
 
 const reducer = persistCombineReducers(persistConfig, {
+  favorites,
   user
 });
 

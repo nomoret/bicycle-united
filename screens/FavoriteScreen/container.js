@@ -1,59 +1,25 @@
 import React, { Component } from "react";
 import FavoriteScreen from "./presenter";
+import PropTypes from "prop-types";
 
 class Container extends Component {
-  state = {
-    data: [
-      {
-        title: "zamsil station",
-        data: [
-          {
-            number: 1234,
-            usableCount: 5,
-            entireCount: 20
-          }
-        ]
-      },
-      {
-        title: "songpa station",
-        data: [
-          {
-            number: 4321,
-            usableCount: 10,
-            entireCount: 30
-          }
-        ]
-      },
-      {
-        title: "tokyo street",
-        data: [
-          {
-            number: 777,
-            usableCount: 10,
-            entireCount: 30
-          }
-        ]
-      }
-    ]
+  static propTypes = {
+    removeFavorite: PropTypes.func.isRequired
   };
-
   render() {
+    const { locationList } = this.props;
     return (
       <FavoriteScreen
-        data={this.state.data}
+        locationList={locationList}
         handleDeleteItem={this._handleDeleteItem}
       />
     );
   }
 
   _handleDeleteItem = number => {
-    const updatedData = this.state.data.filter(
-      item => item.data[0].number != number
-    );
-
-    this.setState({
-      data: updatedData
-    });
+    console.log(number);
+    const { removeFavorite } = this.props;
+    removeFavorite(number);
   };
 }
 

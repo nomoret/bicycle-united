@@ -4,22 +4,26 @@ import Separator from "../../components/Seperator";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const FavoriteScreen = props => {
+  console.log("FavoriteScreen", props);
   return (
     <View style={styles.container}>
-      <Text> Favorite List</Text>
-      {props.data.length > 0 ? (
+      {props.locationList && props.locationList.length > 0 ? (
         <SectionList
-          sections={props.data}
+          sections={props.locationList}
           renderSectionHeader={({ section }) => (
             <FavoriteItemHeader section={section} />
           )}
-          renderItem={({ item }) => (
-            <FavoriteItem
-              item={item}
-              handleDeleteItem={props.handleDeleteItem}
-            />
-          )}
-          keyExtractor={({ number }) => number}
+          renderItem={({ item }) => {
+            return (
+              <FavoriteItem
+                item={item}
+                handleDeleteItem={props.handleDeleteItem}
+              />
+            );
+          }}
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
         />
       ) : (
         <Text style={styles.empty}>
@@ -32,18 +36,16 @@ const FavoriteScreen = props => {
 };
 
 const FavoriteItemHeader = ({ section }) => {
-  const {
-    title,
-    data: [{ number }]
-  } = section;
-  return <Text style={styles.header}>{`${number} - ${title}`}</Text>;
+  const { title } = section;
+  return <Text style={styles.header}>{`${title}`}</Text>;
 };
 
 const FavoriteItem = props => {
   const {
-    item: { number, usableCount, entireCount },
+    item: { id, usableCount, entireCount },
     handleDeleteItem
   } = props;
+
   return (
     <View>
       <View style={styles.item}>
@@ -53,7 +55,7 @@ const FavoriteItem = props => {
         >{` Usable / Max ${entireCount} count `}</Text>
         <TouchableOpacity
           style={styles.deleteBtn}
-          onPressOut={() => handleDeleteItem(number)}
+          onPressOut={() => handleDeleteItem(id)}
         >
           <Text>Delete</Text>
         </TouchableOpacity>

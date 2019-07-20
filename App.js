@@ -7,12 +7,15 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/es/integration/react";
 import configureStore from "./redux/configureStore";
 import AppContainer from "./components/AppContainer";
+import { I18nManager as RNI18nManager } from "react-native";
+import i18n from "./services/i18n";
 
 const { persistor, store } = configureStore();
 
 class App extends Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
+    isI18nInitialized: false
   };
 
   render() {
@@ -46,8 +49,30 @@ class App extends Component {
       Font.loadAsync({
         ...Ionicons.font,
         ...MaterialIcons.font
-      })
+      }),
+      this._loadAysncLocalization()
     ]);
+  };
+
+  _loadAysncLocalization = () => {
+    return new Promise((resolve, reject) => {
+      i18n
+        .init()
+        .then(() => {
+          const RNDir = RNI18nManager.isRTL ? "RTL" : "LTR";
+          // RN doesn't always correctly identify native
+          // locale direction, so we force it here.
+          if (i18n.dir !== RNDir) {
+            const isLocaleRTL = i18n.dir === "RTL";
+            RNI18nManager.forceRTL(isLocaleRTL);
+            // RN won't set the layout direction if we
+            // don't restart the app's JavaScript.
+            Updates.reloadFromCache();
+          }
+          resolve();
+        })
+        .catch(error => reject(error));
+    });
   };
 
   _handleLoadingError = e => {

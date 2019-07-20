@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { Dimensions, StatusBar, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 // import LoggedOutNavigation from "../../navigation/LoggedOutNavigation";
-import ActionNavigation from "../../navigation/ActionNavigation";
+import ActionTabNavigation from "../../navigation/ActionNavigation";
 import WebScreen from "../../screens/WebScreen";
+import { t } from "../../services/i18n";
 
 const { width, height } = Dimensions.get("window");
 class AppContainer extends Component {
@@ -26,16 +27,16 @@ class AppContainer extends Component {
               size={32}
               color="#193AB7"
             />
-            <Text style={styles.title}>Where is Bike?</Text>
+            <Text style={styles.title}>{t("head:title")}</Text>
             <WebScreen style={styles.official} />
           </View>
         </View>
         <View style={styles.actionContainer}>
-          <ActionNavigation />
+          <ActionTabNavigation />
         </View>
-        <View style={styles.advertising}>
+        {/* <View style={styles.advertising}>
           <Text>Advertising area</Text>
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -53,9 +54,10 @@ const styles = StyleSheet.create({
   },
   head: {
     flex: 2,
+    paddingBottom: 10,
     backgroundColor: "#3E99EE",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     width
   },
   dummy: {
@@ -64,10 +66,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 2,
-    // paddingTop: 20,
-    // paddingBottom: 20,
-    // textAlign: "center",
-    // alignContent: "center",
+    textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
     fontSize: 24,
@@ -84,8 +83,7 @@ const styles = StyleSheet.create({
     width
   },
   actionContainer: {
-    flex: 8,
-    paddingTop: 20,
+    flex: 12,
     justifyContent: "flex-start",
     width
   },

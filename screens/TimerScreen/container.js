@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TimerScreen from "./presenter";
 import { Alert } from "react-native";
+import { t } from "../../services/i18n";
 
 const TIMER_NUMBER = 60 * 55;
 
@@ -10,22 +11,16 @@ class Container extends Component {
     isPlaying: false
   };
 
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(state) {
     console.log(state);
+
     if (state.time === 0) {
       clearInterval(state.timeInteval);
       setTimeout(() => {
         Alert.alert(
-          "WARNNING",
-          "Please Return the BIKE",
-          [
-            {
-              text: "Cancel",
-              onPress: () => console.log("Cancel Pressed"),
-              style: "cancel"
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-          ],
+          t("timer:warnning"),
+          t("timer:warnningContent"),
+          [{ text: t("alert:ok"), onPress: () => console.log("OK Pressed") }],
           { cancelable: false }
         );
       }, 1000);
@@ -84,16 +79,9 @@ class Container extends Component {
 
   _timerPopUp = () => {
     Alert.alert(
-      "WARNNING",
-      "Please Return the BIKE",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ],
+      t("timer:warnning"),
+      t("timer:warnningContent"),
+      [{ text: t("alert:ok"), onPress: () => console.log("OK Pressed") }],
       { cancelable: false }
     );
   };

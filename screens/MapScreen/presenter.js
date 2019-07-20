@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
 import MapView, { PROVIDER_GOOGLE, Circle } from "react-native-maps";
+import { t } from "../../services/i18n";
 
 const MapScreen = props => {
   return (
@@ -53,7 +54,8 @@ const MapScreen = props => {
                       <Text>
                         {stationName}
                         {"\n"}
-                        {`남은 자전거 ${parkingBikeTotCnt}`}
+                        {t("map:remainBike")}
+                        {` ${parkingBikeTotCnt}`}
                       </Text>
                     </View>
                   </TouchableHighlight>
@@ -99,7 +101,10 @@ const MapScreen = props => {
                         fontSize: 12,
                         color: "gray"
                       }}
-                    >{`남은 자전거 ${parkingBikeTotCnt}`}</Text>
+                    >
+                      {t("map:remainBike")}
+                      {` ${parkingBikeTotCnt}`}
+                    </Text>
                   </View>
                 </MapView.Callout>
               </MapView.Marker>
@@ -136,8 +141,8 @@ class MyPositionMarker extends React.Component {
           longitude
         }}
         pinColor="blue"
-        title="나의 현 위치"
-        description="가까운 곳은 어디에?"
+        title={t("map:ownPosition")}
+        description={t("map:ownDescription")}
         ref={ref => {
           this.marker = ref;
         }}

@@ -1,0 +1,36 @@
+{
+    "head": {
+        "title":"자전거 어딨어?",
+        "officialSite": "공식 사이트"
+    },
+    "common": {
+        "lists": "리스트3"
+    },
+    "favorite": {
+        "emptyList": "즐겨찾기가 비어있습니다.\n자주 가는 정류장을 지도에서 등록해 보세요!!",
+        "usable": "대 이용가능",
+        "max": "총",
+        "count": "대",
+        "delete": "삭제"
+    },
+    "timer": {
+        "title": "타이머",
+        "play": "시작",
+        "stop": "정지",
+        "alert": "알람",
+        "warnning": "경고",
+        "warnningContent": "자전거 반납시간이 얼마 안남았습니다!"
+    },
+    "map": {
+        "ownPosition": "나의 현 위치",
+        "ownDescription": "가까운 곳은 어디에?",
+        "favorite": "즐겨찾기",
+        "remainBike": "남은 자전거",
+        "addFavorite": "즐겨찾기 목록에 추가하시겠습니까?",
+        "removeFavorite": "즐겨찾기 목록에서 제거하시겠습니까?"
+    },
+    "alert": {
+        "ok": "네",
+        "cancel": "아니오"
+    }
+}

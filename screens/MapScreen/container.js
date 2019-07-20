@@ -5,6 +5,7 @@ import { Alert } from "react-native";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import Constants from "expo-constants";
+import { t } from "../../services/i18n";
 
 class Container extends Component {
   state = {
@@ -118,7 +119,7 @@ class Container extends Component {
       };
     });
 
-    console.log(updateMarkers);
+    // console.log(updateMarkers);
 
     this.setState({
       isLoading: true,
@@ -146,16 +147,16 @@ class Container extends Component {
     }
 
     Alert.alert(
-      "Favorite",
-      !hasFavorite ? "Adding item in List" : "Remove item in List",
+      t("map:favorite"),
+      !hasFavorite ? t("map:addFavorite") : t("map:removeFavorite"),
       [
         {
-          text: "Cancel",
+          text: t("alert:cancel"),
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         },
         {
-          text: "OK",
+          text: t("alert:ok"),
           onPress: () => {
             const { addFavorite, removeFavroite } = this.props;
             if (!hasFavorite) {

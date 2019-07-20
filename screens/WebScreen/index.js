@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, TouchableOpacity, StyleSheet } from "react-native";
 import * as WebBrowser from "expo-web-browser";
+import { t } from "../../services/i18n";
 
 const WEB_HOST_NAME = "http://m.tashu.or.kr";
 export default class WebScreen extends Component {
@@ -14,7 +15,7 @@ export default class WebScreen extends Component {
         style={styles.container}
         onPress={this._handlePressButtonAsync}
       >
-        <Text style={styles.content}>Offical site</Text>
+        <Text style={styles.content}>{t("head:officialSite")}</Text>
       </TouchableOpacity>
     );
   }

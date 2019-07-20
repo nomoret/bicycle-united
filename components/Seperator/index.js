@@ -5,10 +5,9 @@ const Separator = () => <View style={styles.separator} />;
 
 const styles = StyleSheet.create({
   separator: {
+    flex: 1,
     height: 1,
-    width: 400,
-    backgroundColor: "#E4E4E4",
-    marginLeft: 15
+    backgroundColor: "#E4E4E4"
   }
 });
 

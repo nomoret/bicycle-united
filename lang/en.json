@@ -1,0 +1,32 @@
+{
+    "common": {
+        "lists": "Lists"
+    },
+    "favorite": {
+        "emptyList": "Empty favorite list\nPlease Resgist your favorite in map!!",
+        "usable": "Usable",
+        "max": "Max",
+        "count": "count",
+        "delete": "Delete"
+    },
+    "timer": {
+        "title": "Timer Screen",
+        "play": "Play",
+        "stop": "Stop",
+        "alert": "Alert",
+        "warnning": "WARNNING",
+        "warnningContent": "Please Return the BIKE!"
+    },
+    "map": {
+        "ownPosition": "Current My Position",
+        "ownDescription": "Where is near to Bike Station",
+        "favorite": "Favorite",
+        "remainBike": "Usable Bike",
+        "addFavorite": "Adding item in List",
+        "removeFavorite": "Remove item in List"
+    },
+    "alert": {
+        "ok": "ok",
+        "cancel": "cancle"
+    }
+}

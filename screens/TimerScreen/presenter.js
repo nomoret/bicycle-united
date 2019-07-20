@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Dimensions,
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
-const { width } = Dimensions.get("window");
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { t } from "../../services/i18n";
 
 const formatting = time => {
   const minute = Math.floor(time / 60);
@@ -23,21 +16,21 @@ const TimerScreen = props => {
   const { time, handlePlay, resetCount, timerPopUp } = props;
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Timer Screen</Text>
+      <Text style={styles.title}>{t("timer:title")}</Text>
       <Text style={styles.format}>{formatting(time)}</Text>
       <View style={styles.actions}>
         {props.isPlaying ? (
           <TouchableOpacity style={styles.btn} onPress={resetCount}>
-            <Text style={styles.btnText}>Stop</Text>
+            <Text style={styles.btnText}>{t("timer:stop")}</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity style={styles.btn} onPress={handlePlay}>
-            <Text style={styles.btnText}>Play</Text>
+            <Text style={styles.btnText}>{t("timer:play")}</Text>
           </TouchableOpacity>
         )}
       </View>
       <TouchableOpacity style={{ marginTop: 20 }} onPress={timerPopUp}>
-        <Text style={{ color: "#1e88e5" }}>Alert</Text>
+        <Text style={{ color: "#1e88e5" }}>{t("timer:alert")}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -46,7 +39,8 @@ const TimerScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 10
   },
   title: {
     fontSize: 30

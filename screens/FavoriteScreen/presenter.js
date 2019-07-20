@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { SectionList, StyleSheet, Text, View } from "react-native";
 import Separator from "../../components/Seperator";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { t } from "../../services/i18n";
 
 const FavoriteScreen = props => {
-  console.log("FavoriteScreen", props);
+  // console.log("FavoriteScreen", props);
   return (
     <View style={styles.container}>
       {props.locationList && props.locationList.length > 0 ? (
@@ -26,10 +27,7 @@ const FavoriteScreen = props => {
           }}
         />
       ) : (
-        <Text style={styles.empty}>
-          Empty favorite list {"\n"}
-          Please Resgist your favorite in map!!
-        </Text>
+        <Text style={styles.empty}>{t(`favorite:emptyList`)}</Text>
       )}
     </View>
   );
@@ -47,20 +45,27 @@ const FavoriteItem = props => {
   } = props;
 
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <View style={styles.item}>
         <Text style={styles.usable}>{usableCount}</Text>
-        <Text
-          style={styles.entire}
-        >{` Usable / Max ${entireCount} count `}</Text>
+        <Text style={styles.entire}>
+          {" "}
+          {t("favorite:usable")}
+          {" / "}
+          {t("favorite:max")}
+          {` ${entireCount}`}
+          {t("favorite:count")}
+        </Text>
         <TouchableOpacity
           style={styles.deleteBtn}
           onPressOut={() => handleDeleteItem(id)}
         >
-          <Text>Delete</Text>
+          <Text>{t("favorite:delete")}</Text>
         </TouchableOpacity>
       </View>
-      <Separator />
+      <View style={{ marginTop: 3, paddingLeft: 15, paddingRight: 15 }}>
+        <Separator />
+      </View>
     </View>
   );
 };
@@ -72,28 +77,35 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   empty: {
-    // flexGrow: 1,
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center"
   },
   header: {
     marginTop: 10,
+    marginLeft: 5,
     color: "gray"
   },
   item: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    alignItems: "center",
+    height: 30
   },
   usable: {
     color: "red",
-    fontWeight: "700"
+    fontWeight: "700",
+    marginLeft: 10
   },
   entire: {
     flexGrow: 1,
     fontWeight: "700"
   },
   deleteBtn: {
+    width: 50,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#3E99EE",
     borderRadius: 5
   }
